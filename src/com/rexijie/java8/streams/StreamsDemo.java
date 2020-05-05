@@ -1,4 +1,4 @@
-package com.rexijie.java8;
+package com.rexijie.java8.streams;
 
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
@@ -7,11 +7,12 @@ import java.util.stream.Stream;
 
 class StreamStatistics {
     public static void main(String[] args) {
-        List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+        List<String> numbers = Arrays.asList("3", "2", "2", "3", "7", "3", "5");
 
+        // Summary statistics is a new class in Java8 that provides the min, max, sum and average
         IntSummaryStatistics stats = numbers.
                 stream()
-                .mapToInt((x) -> x)
+                .mapToInt(Integer::valueOf)
                 .summaryStatistics();
 
         System.out.println("Highest number in List : " + stats.getMax());
