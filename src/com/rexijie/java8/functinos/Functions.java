@@ -1,6 +1,5 @@
-package com.rexijie.java8.functionalinterface;
+package com.rexijie.java8.functinos;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
