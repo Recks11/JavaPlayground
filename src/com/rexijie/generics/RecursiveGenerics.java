@@ -1,5 +1,11 @@
 package com.rexijie.generics;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * This class shows the use case of Recursive Generics in Java
+ */
 class User {
     private String name;
     private String employer;
@@ -47,9 +53,10 @@ class WorkerBuilder extends UserBuilder<WorkerBuilder> {
 
 
 public class RecursiveGenerics {
+    private static final Logger log = Logger.getLogger("Recursive Generics");
 
     public static void main(String[] args) {
-        UserBuilder ub = new UserBuilder();
+        var ub = new UserBuilder();
         var user = ub
                 .withName("Rex")
                 .build();
@@ -60,7 +67,7 @@ public class RecursiveGenerics {
                 .worksAt("Baeldung")
                 .build();
 
-        System.out.println(user);
-        System.out.println(user2);
+        log.log(Level.INFO, "{0}", user);
+        log.log(Level.INFO, "{0}", user2);
     }
 }

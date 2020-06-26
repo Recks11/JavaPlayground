@@ -11,31 +11,36 @@ class CustomArray {
         this.intArr = new int[size];
     }
 
-    public void removeAt(int index)  {
-        int[] ints;
-        int arrayLength = intArr.length;
-        if (index == 0) {
-            ints = Arrays.copyOfRange(intArr, 1, arrayLength); //to is exclusive
-        } else if (index == lastIndex) {
-            ints = Arrays.copyOfRange(intArr, 0, arrayLength - 1); //to is exclusive
-        } else if ( index >= intArr.length || index < 0 ) {
-            throw new ArrayIndexOutOfBoundsException("Index " +index+ " out of bounds");
-        } else {
-            ints = new int[intArr.length - 1];
-            for (int i = 0; i < intArr.length; i++) {
-                if (i == index) {
-                    // do nothing
-                }
-                if (i < index) {
-                    ints[i] = intArr[i];
-                }
-                if (i > index) {
-                    ints[i - 1] = intArr[i];
-                }
+    private void fillExceptIndex(int[] ints, int index) {
+        for (int i = 0; i < intArr.length; i++) {
+            if (i == index) {
+                continue;
+            }
+            if (i < index) {
+                ints[i] = intArr[i];
+            }
+            if (i > index) {
+                ints[i - 1] = intArr[i];
             }
         }
-        intArr = ints;
-        this.lastIndex--;
+    }
+
+    public void removeAt(int index) {
+        int[] ints = new int[intArr.length - 1];
+        int arrayLength = intArr.length;
+        if (index <= intArr.length && index >= 0) {
+            if (index == 0) {
+                ints = Arrays.copyOfRange(intArr, 1, arrayLength); //to is exclusive
+            } else if (index == lastIndex) {
+                ints = Arrays.copyOfRange(intArr, 0, lastIndex - 1); //to is exclusive
+            } else {
+                fillExceptIndex(ints, index);
+            }
+            intArr = ints;
+            this.lastIndex--;
+            return;
+        }
+        throw new ArrayIndexOutOfBoundsException("Array index [" + index + "] out of bounds, last index is "+ (arrayLength - 1));
     }
 
     public void insert(int item) {
@@ -77,7 +82,8 @@ public class ArrayClass {
         cArr.insert(55);
         cArr.insert(60);
         cArr.insert(70);
-        cArr.removeAt(0);
+        cArr.insert(80);
+        cArr.removeAt(8);
         cArr.print();
     }
 }
