@@ -38,14 +38,14 @@ interface CustomFunction<T, T2, T3, R> {
 public class Functions {
     static Supplier<String[]> generateDateString = () -> new Date().toString().split(" ");
 
-    static Consumer<String> printItem = (o) -> System.out.println(o);
+    static Consumer<String> printItem = o -> System.out.println(o);
     static BiConsumer<String, String> printBothItems = (o, o2) -> System.out.println(o + " and the next is "+ o2);
 
-    static Predicate<String> shorterThan5 = (str) -> str.length() < 5;
+    static Predicate<String> shorterThan5 = str -> str.length() < 5;
     static BiPredicate<String, Integer> stringEqualsInteger = (s, i) -> Integer.valueOf(s).equals(i);
 
-    static Function<Integer, Integer> getSquare = (i) -> i * i;
-    static BiFunction<String, String, String> concatenateString = (a, b) -> a + b;
+    static UnaryOperator<Integer> getSquare = i -> i * i;
+    static BinaryOperator<String> concatenateString = (a, b) -> a + b;
 
     static CustomFunction<Integer, Integer, Integer, List<String>> squareAndReturnStrings = (i1, i2, i3) -> {
       Stream<Integer> st = Stream.of(i1, i2, i3);
